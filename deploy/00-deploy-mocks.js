@@ -3,10 +3,10 @@ const { developmentChains, DECIMALS, INITAL_ANSWER } = require("../helper-hardha
 
 module.exports = async ({ getNamedAccounts, deployments }) => {
     const { deploy, log } = deployments;
-    const deployer = await getNamedAccounts();
+    const { deployer } = await getNamedAccounts();
     const chainId = network.config.chainId;
 
-    if (developmentChains.includes(chainId)) {
+    if (developmentChains.includes(network.name)) {
         log("Local Chain detected. Deploying Mocks...");
         const mockAggregator = await deploy("MockV3Aggregator", {
             contract: "MockV3Aggregator",
